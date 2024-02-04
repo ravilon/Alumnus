@@ -1,0 +1,90 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLPackage</id><coordinates><x>456</x><y>174</y><w>570</w><h>360</h></coordinates><panel_attributes>Almunus DataBase
+--
+bg=blue
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>174</y><w>414</w><h>360</h></coordinates><panel_attributes>Almunus System
+--
+bg=red
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>258</x><y>330</y><w>144</w><h>198</h></coordinates><panel_attributes>_ActionOperator_
+--
+userid: String
+actionForRole: Map[String, String]
+--
++ login(String, String)
++ logout(User)
+
++ addStudent(String, String)
++ removeStudent(String)
+
++ addTeacher(String, String)
++ removeTeacher(String)
+
++ addRoom(Integer, String)
++ removeRoom(Integer)
+
++ addClass(String, String, Date, Date)
++ removeClass(String)
+
++ classCheckin(String, String, Date)
++ classCheckout(String, String, Date)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>144</x><y>348</y><w>126</w><h>24</h></coordinates><panel_attributes>1                                  1</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>Relation</id><coordinates><x>144</x><y>234</y><w>126</w><h>108</h></coordinates><panel_attributes>1                                  1</panel_attributes><additional_attributes>10;10;190;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>24</x><y>288</y><w>126</w><h>84</h></coordinates><panel_attributes>_User_
+--
+- userId: String
+- role: String
+- actionOperator: ActionOperator
+--
++ getActionOperator(String)
++ getUserId()
++ getRole()
++ setPassword(String, String)
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>24</x><y>204</y><w>126</w><h>48</h></coordinates><panel_attributes>_Main_
++ actionOperator: ActionOperator()
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>258</y><w>102</w><h>102</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;realises&gt;&gt;</panel_attributes><additional_attributes>150;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>396</y><w>222</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;realises&gt;&gt;</panel_attributes><additional_attributes>350;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>288</y><w>420</w><h>180</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;realises&gt;&gt;</panel_attributes><additional_attributes>680;10;680;280;10;280</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>366</y><w>474</w><h>126</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;realises&gt;&gt;</panel_attributes><additional_attributes>770;10;770;190;10;190</additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>210</y><w>126</w><h>84</h></coordinates><panel_attributes>_tbl_Class_
+--
+PK ClassID: Varchar
+--
+FK Room: Integer
+FK Teacher: Varchar
+Discipline: Varchar
+StartTime: Timestamp
+EndTime: Timestamp
+EnergyConsumed: Float
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>606</x><y>246</y><w>126</w><h>30</h></coordinates><panel_attributes>PK UserID           FK Teacher
+1                                       0..n</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>606</x><y>378</y><w>126</w><h>54</h></coordinates><panel_attributes>_tbl_ClassUser_
+--
+PK ClassID: Varchar
+PK StudentID: Varchar
+--
+Checkin: Timestamp
+Checkout: Timestamp
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>678</x><y>288</y><w>120</w><h>102</h></coordinates><panel_attributes>PK ClassID -&gt; ClassID
+n                      n</panel_attributes><additional_attributes>120;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>546</x><y>276</y><w>138</w><h>114</h></coordinates><panel_attributes>PK UserID -&gt; StudentID
+n                    n
+
+
+</panel_attributes><additional_attributes>10;10;160;170</additional_attributes></element><element><id>UMLClass</id><coordinates><x>486</x><y>222</y><w>126</w><h>60</h></coordinates><panel_attributes>_tbl_User_
+--
+PK UserID: Varchar
+--
+UserName: Varchar
+UserPassword: Varchar
+Role: Varchar
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>840</x><y>330</y><w>126</w><h>42</h></coordinates><panel_attributes>_tbl_Room_
+--
+PK RoomID: Integer
+--
+RoomDesc: Varchar
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>816</x><y>288</y><w>96</w><h>54</h></coordinates><panel_attributes>PK Room           FK RoomID
+n                                         1</panel_attributes><additional_attributes>20;10;130;70</additional_attributes></element></diagram>
