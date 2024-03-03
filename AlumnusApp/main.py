@@ -1,23 +1,27 @@
 # Class main
-# Here we will teste the QueryExecutor class
+from flask import Flask
+from ActionProcessor.ActionProcessor import ActionProcessor
+from User.User import User
 
-# Import the class QueryExecutor
-from DataBaseInterface.QueryExecutor import QueryExecutor
+import os
 
-# Create a instance of the class QueryExecutor
-query_executor = QueryExecutor()
+print("Current working directory:", os.getcwd())
 
-# Create a query to get all the Users
-query = "SELECT * FROM ConectUser"
 
-# Fetch the results from the cursor
-results = query_executor.execute_query(query, None)
+app = Flask(__name__)
+@app.route("/")
+def hello_world():
+    actionProcessor = ActionProcessor()
+    # Create a query to get all the Users
+    user = actionProcessor.login("admin", "Inter@1234")
+    if (user != None):
+        print("Login:" , user.name, user.email, user.role)
+    else:
+        print("Login failed")
+    return "<p>Hello, World!</p>"
+# Create a instance of the class ActionProcessor
 
-# Print the results
-for row in results:
-    print(row)
 
-# Close the connection
-query_executor.close()
+
 
 

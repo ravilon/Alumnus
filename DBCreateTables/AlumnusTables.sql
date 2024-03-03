@@ -1,36 +1,44 @@
+/*
+    This script creates the necessary tables for the Alumnus database.
+    It includes tables for users, rooms, lessons, and lesson attendance.
+    The tables are defined with their respective columns and constraints.
+*/
+
+-- FILEPATH: /c:/Users/ravil/OneDrive/Documentos/GitHub/Alumnus/DBCreateTables/AlumnusTables.sql
 --CREATE USER alumnus WITH PASSWORD 'Inter@1234' SUPERUSER;
 
-CREATE TABLE ConectUser (
-    ConectUserID Varchar(50) PRIMARY KEY,
-    ConectUserName Varchar(50),
-    ConectUserPassword Varchar(50),
-    Role Varchar(50) 
+CREATE TABLE CONNECTUSER (
+    USERID VARCHAR(50) PRIMARY KEY,
+    NAME VARCHAR(50),
+    PASSWORD VARCHAR(50),
+    ROLE VARCHAR(50),
+    EMAIL VARCHAR(255)
 );
 
-CREATE TABLE Room (
-    RoomID Integer PRIMARY KEY,
-    RoomDesc Varchar(50)
+CREATE TABLE ROOM (
+    ROOMID INTEGER PRIMARY KEY,
+    ROOMDESC VARCHAR(50)
 );
 
-CREATE TABLE Lesson (
-    LessonID Varchar(50) PRIMARY KEY,
-    Room Integer,
-    Teacher Varchar(50),
-    Discipline Varchar(50),
-    StartTime Timestamp,
-    EndTime Timestamp,
-    EnergyConsumed Float,
-	FOREIGN KEY (Room) REFERENCES Room(RoomId),
-	FOREIGN KEY (Teacher) REFERENCES ConectUser(ConectUserID)
+CREATE TABLE LESSON (
+    LESSONID VARCHAR(50) PRIMARY KEY,
+    ROOM INTEGER,
+    TEACHER VARCHAR(50),
+    DISCIPLINE VARCHAR(50),
+    STARTTIME TIMESTAMP,
+    ENDTIME TIMESTAMP,
+    ENERGYCONSUMED FLOAT,
+	FOREIGN KEY (ROOM) REFERENCES ROOM(ROOMID),
+	FOREIGN KEY (TEACHER) REFERENCES CONECTUSER(USERID)
 );
 
-CREATE TABLE Lesson_ConectUser (
-    LessonID Varchar(50),
-    StudentID Varchar(50),
-    Checkin Timestamp,
-    Checkout Timestamp,
-    PRIMARY KEY (LessonID, StudentID),
-    FOREIGN KEY (LessonID) REFERENCES Lesson(LessonID),
-    FOREIGN KEY (StudentID) REFERENCES ConectUser(ConectUserID)
+CREATE TABLE LESSON_CONECTUSER (
+    LESSONID VARCHAR(50),
+    STUDENTID VARCHAR(50),
+    CHECKIN TIMESTAMP,
+    CHECKOUT TIMESTAMP,
+    PRIMARY KEY (LESSONID, STUDENTID),
+    FOREIGN KEY (LESSONID) REFERENCES LESSON(LESSONID),
+    FOREIGN KEY (STUDENTID) REFERENCES CONECTUSER(USERID)
 );
 

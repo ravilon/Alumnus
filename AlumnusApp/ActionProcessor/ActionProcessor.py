@@ -22,19 +22,49 @@ actionForRole: Map[String, String]
 + classCheckin(String, String, Date)
 + classCheckout(String, String, Date) """
 
-from AlumnusApp.DataBaseInterface.QueryExecutor import QueryExecutor
+from DataBaseInterface.QueryExecutor import QueryExecutor
+from User.User import User
 
 class ActionProcessor:
     def __init__(self):
-        self.query_executor = QueryExecutor()
+        self.queryExecutor = QueryExecutor()
         
-    def login(self, email, password):
-        query = "SELECT * FROM ConectUser WHERE email = %s AND password = %s"
-        parameters = (email, password)
-        results = self.query_executor.execute_query(query, parameters)
+    def login(self, conectUserId, password):
+        """ if len(results) == 1:
+            # Print out the column names returned by the query
+            print("Column names:", [desc[0] for desc in self.queryExecutor.cursor.description])
+            # Find the index of the column name "conectuserid" dynamically
+            column_names = [desc[0] for desc in self.queryExecutor.cursor.description]
+            column_index = None
+            for index, name in enumerate(column_names):
+                if name.lower() == 'conectuserid':
+                    column_index = index
+                    break
+            if column_index is not None:
+                print("Index of the column name 'conectuserid':", column_index)
+                print("Value of the column name 'conectuserid':", results[0][column_index])
+                return results[0] """
+                
+        query = "SELECT * FROM ConectUser WHERE conectuserid = %s AND conectuserpassword = %s"
+        parameters = (conectUserId, password)
+        results = self.queryExecutor.execute_query(query, parameters)
         if len(results) == 1:
-            return results[0]
+            # Create a map for each index to column value
+            print(results[0])
+            userProperties = {
+                "conectuserid": results[0][0],
+                "conectusername": results[0][1],
+                "conectuserpassword": results[0][2],
+                "role": results[0][3],
+                "email": results[0][4],
+            }
+            user = User(userProperties)
+            return user
+        return None        
+            
         return None
+
+           
     
     def logout(self, user):
         # TODO: Implement logout logic
