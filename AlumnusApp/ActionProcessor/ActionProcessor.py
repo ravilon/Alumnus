@@ -126,11 +126,11 @@ class ActionProcessor:
             return False
         
     
-    def addClass(self, class_id, class_name, start_date, end_date):
+    def addLesson(self, class_id, class_name, start_date, end_date):
         # TODO: Implement addClass logic
         pass
     
-    def removeClass(self, class_id):
+    def removeRemove(self, class_id):
         # TODO: Implement removeClass logic
         pass
     

@@ -1,29 +1,31 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Admin Menu</title>
+  <title>Admin Menu</title>
 {% endblock %}
 
-{% block navbar%}
-        <h1 color='red'>{{message}}</h1>
-        <ul class="navbar-links">
-            <li class="navbar-links">
-                <a href="/manageuser">
-                    <p class='navbar-conteiner'>Add User</p>
-                </a>
-            </li>
-        </ul>
-        <ul class="navbar-links">
-            <li class="navbar-links">
-                <a href="/manageroom">
-                    <p class='navbar-conteiner'>Manage Rooms</p>
-                </a>
-            </li>
-        </ul>
-  
+{% block navbar %}
+    
 {% endblock %}
 
 {% block body %}  
-  <h1>Admin Menu - Wellcome {{user.name}}</h1>
+  <h1>Admin Menu - Wellcome {{ user.name }}</h1>
+  <h1>{{ message }}</h1>
+  <div class = "navbar">
+  <ul class="navbar-links">
+    <li class="navbar-links">
+      <a href="/manageuser">
+        <p class='navbar-conteiner'>Add User</p>
+      </a>
+    </li>
+  </ul>
+  <ul class="navbar-links">
+    <li class="navbar-links">
+      <a href="/manageroom">
+        <p class='navbar-conteiner'>Manage Rooms</p>
+      </a>
+    </li>
+  </ul>
+</div>
   <h2>This is the Admin Menu</h2> 
 {% endblock %}
