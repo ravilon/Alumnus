@@ -81,10 +81,10 @@ class ActionProcessor:
         queryExecutor.close()
         return results
     
-    def deleteUser(self, student_id):
+    def deleteUser(self, studentId):
         queryExecutor = QueryExecutor()
         query = "DELETE FROM conectuser WHERE conectuserid = %s"
-        parameters = (student_id,)
+        parameters = (studentId,)
         queryExecutor.execute_query(query, parameters)
         if queryExecutor.cursor.rowcount == 1:
             queryExecutor.close()
@@ -113,10 +113,10 @@ class ActionProcessor:
         queryExecutor.close()
         return results
     
-    def deleteRoom(self, room_id):
+    def deleteRoom(self, roomId):
         queryExecutor = QueryExecutor()
         query = "DELETE FROM room WHERE roomid = %s"
-        parameters = (room_id,)
+        parameters = (roomId,)
         queryExecutor.execute_query(query, parameters)
         if queryExecutor.cursor.rowcount == 1:
             queryExecutor.close()
@@ -126,19 +126,45 @@ class ActionProcessor:
             return False
         
     
-    def addLesson(self, class_id, class_name, start_date, end_date):
-        # TODO: Implement addClass logic
-        pass
+    def addLesson(self, lessonProperties):
+        #INSERT INTO LESSON (LESSONID, ROOM, TEACHER, DISCIPLINE, STARTTIME, ENDTIME, ENERGYCONSUMED)
+        #VALUES ('lesson1', 354, 'teacher1', '354', '2024-03-01 09:00:00', '2024-03-01 11:00:00', 50.5);
+        try:
+            queryExecutor = QueryExecutor()
+            query = """
+            INSERT INTO lesson (lessonid, room, teacher, discipline, starttime, endtime, energyconsumed)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            
+            parameters = (lessonProperties['lessonid'], 
+                        lessonProperties['room'], 
+                        lessonProperties['teacher'], 
+                        lessonProperties['discipline'], 
+                        lessonProperties['starttime'], 
+                        lessonProperties['endtime'], 
+                        lessonProperties['energyconsumed'])
+            queryExecutor.execute_query(query, parameters)
+            if queryExecutor.cursor.rowcount == 1:
+                queryExecutor.close()
+                return True
+        except Exception as e:
+            queryExecutor.close()
+            return False
     
-    def removeRemove(self, class_id):
-        # TODO: Implement removeClass logic
-        pass
+    def getLessons(self, teacherId):
+        # SELECT * FROM lesson WHERE teacher = 'teacher1'
+        queryExecutor = QueryExecutor()
+        query = "SELECT * FROM lesson WHERE teacher = %s"
+        parameters = (teacherId,)
+        results = queryExecutor.execute_query(query, parameters)
+        queryExecutor.close()
+        return results
     
-    def classCheckin(self, student_id, class_id, checkin_date):
+    def lessonCheckin(self, student_id, class_id, checkin_date):
         # TODO: Implement classCheckin logic
         pass
     
-    def classCheckout(self, student_id, class_id, checkout_date):
+    def lessonCheckout(self, student_id, class_id, checkout_date):
         # TODO: Implement classCheckout logic
         pass
         

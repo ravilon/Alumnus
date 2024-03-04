@@ -67,5 +67,33 @@ def deleteRoom():
     actionProcessor.deleteRoom(roomid)
     return render_template('manageroom.html', message="Room deleted successfully: " + roomid, roomList=actionProcessor.getRooms())
 
+@app.route("/managelesson", methods=['GET', 'POST'])
+def addLesson():
+    if request.method == 'POST':
+        lessonProperties = {
+            "lessonid": request.form['lessonid'],
+            "room": request.form['room'],
+            "teacher": request.form['teacher'],
+            "discipline": request.form['discipline'],
+            "starttime": request.form['starttime'],
+            "endtime": request.form['endtime'],
+            "energyconsumed": request.form['energyconsumed']
+        }
+        if actionProcessor.addLesson(lessonProperties):
+            return render_template('managelesson.html', message="Lesson added successfully", 
+                                   lessonList=actionProcessor.getLessons(request.form['teacher']),
+                                   roomList=actionProcessor.getRooms(),
+                                    userid=request.form['teacher'])
+                                   
+        return render_template('managelesson.html', message="Lesson add fail", 
+                               lessonList=actionProcessor.getLessons(request.form['teacher']),
+                               roomList=actionProcessor.getRooms(),
+                               userid=request.form['teacher'])
+    userid = request.args.get('userid')
+    return render_template('managelesson.html', message="Lesson not added", 
+                           lessonList=actionProcessor.getLessons(userid), 
+                           roomList=actionProcessor.getRooms(),
+                           userid=userid)
+
 
 

@@ -1,38 +1,24 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Teacher Menu</title>
+  <title>Teacher Menu</title>
 {% endblock %}
 
-{% block navbar%}
+{% block navbar %}
     
 {% endblock %}
 
-{% block body %}
-    
-    <h1>Teacher Menu - Wellcome {{user.name}}</h1>
-    <div><h2>Class<h2/>
-        <table>
-            <tr>
-                <th>Room</th>
-                <th>Subject</th>
-                <th>Teacher</th>
-                <th>Students</th>
-            </tr>
-            {% for room in rooms %}
-                <tr>
-                    <td>{{room.room}}</td>
-                    <td>{{room.subject}}</td>
-                    <td>{{room.teacher}}</td>
-                    <td>{{room.students}}</td>
-                </tr>
-            {% endfor %}
-    </div>   
-    <ul class="navbar-links">
+{% block body %}  
+  <div class= "container">
+    <div class = "navbar">
+      <ul class="navbar-links">
         <li class="navbar-links">
-            <a href="/adduser">
-                <p class='navbar-conteiner'>Add User</p>
-            </a>
+            <a href="/managelesson?userid={{user.id}}">Manage Lessons</a>
         </li>
-    </ul>
+      </ul>
+    </div>
+  </div>
+  <h1>Teacher Menu - Wellcome {{ user.name }}</h1>
+  <h1>{{ message }}</h1>
+  <h2>This is the Teacher Menu</h2> 
 {% endblock %}

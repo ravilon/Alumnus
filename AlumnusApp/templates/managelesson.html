@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Lessons</title>
+{% endblock %}
+
+{% block navbar%}
+    
+{% endblock %}
+
+{% block body %}
+  <div class='container'><h1>Lesson Manage</h1></div>
+    <div class='container'>
+    <h2>Create Lesson</h2>
+    <p>{{message}}</p>
+    <form method="post" action="/managelesson">
+      <div class="form-group">
+        <label for="lessonid">Lesson ID</label>
+        <input type="text" class="form-control" id="lessonid" name="lessonid" placeholder="Enter Lesson ID">
+        <p></p>
+        <label for="room">Room</label>
+        <select id="role" name="room" required>
+          {% for room in roomList %}
+            <option value="{{room[0]}}">{{room[1]}}</option>
+          {% endfor %}
+        </select>  
+        <p></p>
+        <label for="teacher">Teacher</label>
+        <input type="text" class="form-control" id="teacher" name="teacher" value="{{userid}}" readonly>
+        <p></p>
+        <label for="discipline">Discipline</label>
+        <input type="text" class="form-control" id="discipline" name="discipline" placeholder="Enter Discipline">
+        <p></p>
+        <label for="starttime">Start Time</label>
+        <input type="datetime-local" class="form-control" id="starttime" name="starttime" placeholder="Enter Start Time">
+        <p></p>
+        <label for="endtime">End Time</label>
+        <input type="datetime-local" class="form-control" id="endtime" name="endtime" placeholder="Enter End Time">
+        <p></p>
+        <label for="energyconsumed">Energy Consumed</label>
+        <input type="text" class="form-control" id="energyconsumed" name="energyconsumed" placeholder="Enter Energy Consumed">
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+  <h2>Lesson List</h2>
+  <table class="container">
+      <thead >
+          <tr >
+              <th>Lesson ID</th>
+              <th>Room</th>
+              <th>Teacher</th>
+              <th>Discipline</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Energy Consumed</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+  <tbody>
+      {% for lesson in lessonList %}
+      <tr>
+        <td>{{ lesson[0] }}</td>
+        <td>{{ lesson[1] }}</td>
+        <td>{{ lesson[2] }}</td>
+        <td>{{ lesson[3] }}</td>
+        <td>{{ lesson[4] }}</td>
+        <td>{{ lesson[5] }}</td>
+        <td>{{ lesson[6] }}</td>
+        <td >
+          <form method="post" action="/deletelesson">
+            <input type="hidden" name="lessonid" value="{{ lesson[0] }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td> 
+      </tr>
+      {% endfor %}
+  </tbody>
+  </table> 
+    
+    
+{% endblock %}

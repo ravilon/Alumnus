@@ -9,23 +9,25 @@
 {% endblock %}
 
 {% block body %}  
+  <div class= "container">
+    <div class = "navbar">
+      <ul class="navbar-links">
+        <li class="navbar-links">
+          <a href="/manageuser">
+            <p class='navbar-conteiner'>Add User</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-links">
+        <li class="navbar-links">
+          <a href="/manageroom">
+            <p class='navbar-conteiner'>Manage Rooms</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
   <h1>Admin Menu - Wellcome {{ user.name }}</h1>
   <h1>{{ message }}</h1>
-  <div class = "navbar">
-  <ul class="navbar-links">
-    <li class="navbar-links">
-      <a href="/manageuser">
-        <p class='navbar-conteiner'>Add User</p>
-      </a>
-    </li>
-  </ul>
-  <ul class="navbar-links">
-    <li class="navbar-links">
-      <a href="/manageroom">
-        <p class='navbar-conteiner'>Manage Rooms</p>
-      </a>
-    </li>
-  </ul>
-</div>
   <h2>This is the Admin Menu</h2> 
 {% endblock %}
