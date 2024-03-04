@@ -5,6 +5,29 @@
 {% endblock %}
 
 {% block navbar%}
+    
+{% endblock %}
+
+{% block body %}
+    
+    <h1>Teacher Menu - Wellcome {{user.name}}</h1>
+    <div><h2>Class<h2/>
+        <table>
+            <tr>
+                <th>Room</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Students</th>
+            </tr>
+            {% for room in rooms %}
+                <tr>
+                    <td>{{room.room}}</td>
+                    <td>{{room.subject}}</td>
+                    <td>{{room.teacher}}</td>
+                    <td>{{room.students}}</td>
+                </tr>
+            {% endfor %}
+    </div>   
     <ul class="navbar-links">
         <li class="navbar-links">
             <a href="/adduser">
@@ -12,12 +35,4 @@
             </a>
         </li>
     </ul>
-{% endblock %}
-
-{% block body %}
-    
-    <h1>Admin Menu - Wellcome {{user.name}}</h1>
-    <div>
-        
-    </div>   
 {% endblock %}

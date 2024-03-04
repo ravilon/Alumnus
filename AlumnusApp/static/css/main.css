@@ -5,7 +5,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #50b8e7; /* Adjust the alpha value (0.5 for 50% opacity) */
+    background-color: #0a94d3; /* Adjust the alpha value (0.5 for 50% opacity) */
     background-blend-mode: overlay;
     overflow:auto;
 }
@@ -19,15 +19,15 @@ body {
 
 /* Style the container */
 .container {
-    color:#fff;
+    color:#ffffff;
     word-wrap: break-word;    
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding-top: 200px;
     padding: 20px;
-    border: 1px solid #84cdee;
+    border: 1px solid #035377;
     border-radius: 10px;
-    background-color: #84cdee;
+    background-color: #045d86;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,7 +95,7 @@ button[type="submit"]:hover {
 
 /* Style the navbar */
 .navbar {
-    background-color: #014d6f; /* Lemon Yellow */
+    background-color: #026d9e; /* Lemon Yellow */
     color: #dcf0fa; /* Lemon Green */
     padding: 10px 0;
     margin: auto;
