@@ -17,7 +17,8 @@ def home():
             if user.role == "admin":
                 return render_template('admin.html', user=user)
             elif user.role == "student":
-                return render_template('student.html', user=user)
+                lesson = actionProcessor.getLessonByStudent(user.id)
+                return render_template('student.html', user=user, lesson=lesson)
             elif user.role == "teacher":
                 return render_template('teacher.html', user=user)
             return render_template('home.html')
@@ -94,6 +95,38 @@ def addLesson():
                            lessonList=actionProcessor.getLessons(userid), 
                            roomList=actionProcessor.getRooms(),
                            userid=userid)
+    
+@app.route("/deletelesson", methods=['POST'])
+def deleteLesson():
+    lessonid = request.form['lessonid']
+    actionProcessor.deleteLesson(lessonid)
+    return render_template('managelesson.html', message="Lesson deleted successfully: " + lessonid, 
+                               lessonList=actionProcessor.getLessons(request.form['userid']),
+                               roomList=actionProcessor.getRooms(),
+                               userid=request.form['userid'])
+    
+@app.route("/editlesson", methods=['GET'])
+def getLessonMaint():
+    lessonid = request.args.get('lessonid')
+    lesson = actionProcessor.getLesson(lessonid)
+    studentsOnLesson = actionProcessor.getStudentsOnLesson(lessonid)
+    return render_template('editlesson.html', lesson=lesson, studentsOnLesson=studentsOnLesson)
+
+@app.route("/enterlesson", methods=['GET','POST'])
+def enterLesson():   
+    if request.method == 'POST':
+        lessonProperties = {
+            "lessonid": request.form['lessonid'],
+            "student": request.form['userid']
+        }
+        lessonid = actionProcessor.enterLesson(lessonProperties)
+        if lessonid != None:
+            lesson = actionProcessor.getLesson(lessonid)
+            studentsOnLesson = actionProcessor.getStudentsOnLesson(lessonid)
+            return render_template('studentlesson.html', message="Lesson entered successfully", lesson=lesson ,studentsOnLesson = studentsOnLesson )               
+    return render_template('student.html', message="Lesson enter fail")
+
+
 
 
 

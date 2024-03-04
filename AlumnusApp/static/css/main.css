@@ -48,17 +48,12 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 /* Style the form elements */
 .form-group {
     margin-bottom: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
 }
 
 tbody {
@@ -67,7 +62,7 @@ tbody {
 
 th, td {
     color: #ffffff;
-    padding: 5px;
+    padding: 1px;
     text-align: left;
     font-size: 10px; /* Adjust the font size as needed */
     border-bottom: 1px solid #ddd;
@@ -114,7 +109,7 @@ button[type="submit"] {
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 12px 20px;
+    padding: 10px 10px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease;

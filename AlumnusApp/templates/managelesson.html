@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Lessons</title>
+  <title>Lessons</title>
 {% endblock %}
 
 {% block navbar%}
-    
+  
 {% endblock %}
 
 {% block body %}
-  <div class='container'><h1>Lesson Manage</h1></div>
-    <div class='container'>
+  <div class='container'>
+    <h1>Lesson Manage</h1>
+  </div>
+  <div class='container'>
     <h2>Create Lesson</h2>
     <p>{{message}}</p>
     <form method="post" action="/managelesson">
@@ -21,7 +23,7 @@
         <label for="room">Room</label>
         <select id="role" name="room" required>
           {% for room in roomList %}
-            <option value="{{room[0]}}">{{room[1]}}</option>
+          <option value="{{room[0]}}">{{room[1]}}</option>
           {% endfor %}
         </select>  
         <p></p>
@@ -45,19 +47,19 @@
   </div>
   <h2>Lesson List</h2>
   <table class="container">
-      <thead >
-          <tr >
-              <th>Lesson ID</th>
-              <th>Room</th>
-              <th>Teacher</th>
-              <th>Discipline</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Energy Consumed</th>
-              <th>Actions</th>
-          </tr>
-      </thead>
-  <tbody>
+    <thead>
+      <tr>
+        <th>Lesson ID</th>
+        <th>Room</th>
+        <th>Teacher</th>
+        <th>Discipline</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Energy Consumed</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
       {% for lesson in lessonList %}
       <tr>
         <td>{{ lesson[0] }}</td>
@@ -67,16 +69,20 @@
         <td>{{ lesson[4] }}</td>
         <td>{{ lesson[5] }}</td>
         <td>{{ lesson[6] }}</td>
-        <td >
+        <td>
           <form method="post" action="/deletelesson">
             <input type="hidden" name="lessonid" value="{{ lesson[0] }}">
+            <input type="hidden" name="userid" value="{{ userid }}">
             <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          <form method="get" action="/editlesson">
+            <input type="hidden" name="lessonid" value="{{ lesson[0] }}">
+            <input type="hidden" name="userid" value="{{ userid }}">
+            <button type="submit" class="btn btn-danger"> Edit </button>
           </form>
         </td> 
       </tr>
       {% endfor %}
-  </tbody>
+    </tbody>
   </table> 
-    
-    
 {% endblock %}

@@ -4,20 +4,48 @@
     <title>Student Menu</title>
 {% endblock %}
 
-{% block navbar%}
-    <ul class="navbar-links">
-        <li class="navbar-links">
-            <a href="/adduser">
-                <p class='navbar-conteiner'>Add User</p>
-            </a>
-        </li>
-    </ul>
+{% block navbar %}
+    
 {% endblock %}
 
 {% block body %}
-    
-    <h1>Admin Menu - Wellcome {{user.name}}</h1>
-    <div>
-        
-    </div>   
+    <h1>Student Menu - Welcome {{user.name}}</h1>
+    <div class="conteiner">
+        <div class="conteiner">
+            <h2>Enter Class Lesson</h2>
+            <h3>{{message}}</h3>
+            <form action="/enterlesson" method="post" >
+                <input type="text" name="lessonid" placeholder="Lesson ID">
+                <input type="text" name="userid" value="{{user.id}}" hidden>
+                <button type="submit" class="btn btn-danger">Enter</button>
+            </form>
+        </div>    
+    </div>
+    <div class="conteiner">
+        {% if lessons %}
+            <h2>Lessons</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Lesson ID</th>
+                        <th>Lesson Name</th>
+                        <th>Teacher</th>
+                        <th>Class</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lesson in lessons %}
+                        <tr>
+                            <td>{{lesson.id}}</td>
+                            <td>{{lesson.name}}</td>
+                            <td>{{lesson.teacher}}</td>
+                            <td>{{lesson.class}}</td>
+                            <td>{{lesson.time}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>       
 {% endblock %}

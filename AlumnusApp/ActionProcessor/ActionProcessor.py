@@ -22,6 +22,7 @@ actionForRole: Map[String, String]
 + classCheckin(String, String, Date)
 + classCheckout(String, String, Date) """
 
+import datetime
 from DataBaseInterface.QueryExecutor import QueryExecutor
 from User.User import User
 
@@ -160,9 +161,59 @@ class ActionProcessor:
         queryExecutor.close()
         return results
     
-    def lessonCheckin(self, student_id, class_id, checkin_date):
-        # TODO: Implement classCheckin logic
-        pass
+    def getLesson(self, lessonId):
+        queryExecutor = QueryExecutor()
+        query = "SELECT * FROM lesson WHERE lessonid = %s"
+        parameters = (lessonId,)
+        results = queryExecutor.execute_query(query, parameters)
+        queryExecutor.close()
+        return results
+    
+    def getStudentsOnLesson(self, lessonId):
+        queryExecutor = QueryExecutor()
+        query = "SELECT * FROM lesson_conectuser WHERE lessonid = %s"
+        parameters = (lessonId,)
+        results = queryExecutor.execute_query(query, parameters)
+        queryExecutor.close()
+        return results
+    
+    def deleteLesson(self, lessonId):
+        queryExecutor = QueryExecutor()
+        query = "DELETE FROM lesson WHERE lessonid = %s"
+        parameters = (lessonId,)
+        queryExecutor.execute_query(query, parameters)
+        if queryExecutor.cursor.rowcount == 1:
+            queryExecutor.close()
+            return True
+        else:
+            queryExecutor.close()
+            return False
+    
+    def enterLesson(self, lessonProperties):
+        try:
+            queryExecutor = QueryExecutor()
+            query = """
+            INSERT INTO lesson_conectuser (lessonid, studentid, checkin)
+            VALUES (%s, %s, %s)
+            """
+            parameters = (lessonProperties['lessonid'], lessonProperties['student'], datetime.datetime.now())
+            queryExecutor.execute_query(query, parameters)
+            if queryExecutor.cursor.rowcount == 1:
+                queryExecutor.close()
+                return lessonProperties['lessonid']
+            else:
+                queryExecutor.close()
+                return None
+        except Exception as e:
+            queryExecutor.close()
+            return lessonProperties['lessonid']
+    def getLessonByStudent(self, studentId):
+        queryExecutor = QueryExecutor()
+        query = "SELECT * FROM lesson_conectuser WHERE studentid = %s"
+        parameters = (studentId,)
+        results = queryExecutor.execute_query(query, parameters)
+        queryExecutor.close()
+        return results
     
     def lessonCheckout(self, student_id, class_id, checkout_date):
         # TODO: Implement classCheckout logic

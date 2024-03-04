@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Lessons</title>
+{% endblock %}
+
+{% block navbar%}
+    
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Lesson {{lesson[0][0]}}</h1>
+    <h2>{{lesson[0][1]}}</p>
+    <h2>{{lesson[0][2]}}</p>
+    <h2>{{lesson[0][3]}}</p>
+    <h2>{{lesson[0][4]}}</p>
+    <h2>{{lesson[0][5]}}</p>
+    <h2>{{lesson[0][6]}}</p>
+</div>
+<h2>Students List</h2>
+  <table class="container">
+      <thead >
+          <tr class="container" >
+              <th>Lesson ID</th>
+              <th>Student ID</th>
+              <th>Checkin</th>
+              <th>Checkout</th>
+          </tr>
+      </thead>
+  <tbody>
+      {% for students in studentsOnLesson %}
+      <tr >
+        <td>{{ students[0] }}</td>
+        <td>{{ students[1] }}</td>
+        <td>{{ students[2] }}</td>
+        <td>{{ students[3] }}</td>
+        <td class="container">
+          <form method="post" action="/deletelesson">
+            <input type="hidden" name="lessonid" value="{{ lesson[0] }}">
+            <input type="hidden" name="userid" value="{{ userid }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          <p></p>
+          <form method="get" action="/editlesson">
+            <input type="hidden" name="lessonid" value="{{ lesson[0] }}">
+            <input type="hidden" name="userid" value="{{ userid }}">
+            <button type="submit" class="btn btn-danger"> Edit </button>
+        </td> 
+      </tr>
+      {% endfor %}
+  </tbody>
+  </table>
+{% endblock %}

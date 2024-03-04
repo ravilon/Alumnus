@@ -8,16 +8,18 @@
     
 {% endblock %}
 
-{% block body %}  
+{% block body %}
   <div class= "container">
     <div class = "navbar">
       <ul class="navbar-links">
         <li class="navbar-links">
-            <a href="/managelesson?userid={{user.id}}">Manage Lessons</a>
-        </li>
-      </ul>
+            <a href="/managelesson?userid={{user.id}}">
+              <p class="navbar-conteiner"> Manage Lessons</p>
+            </a>
+          </li>
+        </ul>
     </div>
-  </div>
+  </div>  
   <h1>Teacher Menu - Wellcome {{ user.name }}</h1>
   <h1>{{ message }}</h1>
   <h2>This is the Teacher Menu</h2> 
