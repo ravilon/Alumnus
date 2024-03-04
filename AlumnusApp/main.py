@@ -41,6 +41,24 @@ def addUser():
             return render_template('adduser.html', message="User added successfully")
     return render_template('adduser.html', message="User not added")
 
+@app.route("/manageroom", methods=['GET', 'POST'])
+def addRoom():
+    if request.method == 'POST':
+        roomProperties = {
+            "roomid": request.form['roomid'],
+            "roomdesc": request.form['roomdesc']
+        }
+        if actionProcessor.addRoom(roomProperties):
+            return render_template('manageroom.html', message="Room added successfully", roomList=actionProcessor.getRooms())
+        return render_template('manageroom.html', message="Room add fail", roomList=actionProcessor.getRooms())
+    return render_template('manageroom.html', message="Room not added", roomList=actionProcessor.getRooms())
+
+@app.route("/deleteroom", methods=['POST'])
+def deleteRoom():
+    roomid = request.form['roomid']
+    print(roomid)
+    actionProcessor.deleteRoom(roomid)
+    return render_template('manageroom.html', message="Room deleted successfully: " + roomid, roomList=actionProcessor.getRooms())
 
 
 

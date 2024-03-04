@@ -46,6 +46,23 @@ form {
     margin-bottom: 20px;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+tbody {
+    background-color: #035377;  
+}
+
+th, td {
+    color:#010804;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
 label {
     display: block;
     font-weight: bold;
@@ -53,7 +70,7 @@ label {
 }
 
 select {
-    width: 79%;
+    width: 77.5%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -61,7 +78,9 @@ select {
     transition: border-color 0.3s ease;
 }
 
+
 input[type="text"],
+input[type="number"],
 input[type="password"] {
     width: 75%;
     padding: 12px;
@@ -95,7 +114,7 @@ button[type="submit"]:hover {
 
 /* Style the navbar */
 .navbar {
-    background-color: #026d9e; /* Lemon Yellow */
+    background-color: #035377; /* Lemon Yellow */
     color: #dcf0fa; /* Lemon Green */
     padding: 10px 0;
     margin: auto;

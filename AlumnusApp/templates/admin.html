@@ -5,12 +5,7 @@
 {% endblock %}
 
 {% block navbar%}
-    
-{% endblock %}
-
-{% block body %}
-    <h1>Admin Menu - Wellcome {{user.name}}</h1>
-    <div class="container">
+        <h1 color='red'>{{message}}</h1>
         <ul class="navbar-links">
             <li class="navbar-links">
                 <a href="/adduser">
@@ -18,7 +13,17 @@
                 </a>
             </li>
         </ul>
-    </div> 
-    
-      
+        <ul class="navbar-links">
+            <li class="navbar-links">
+                <a href="/manageroom">
+                    <p class='navbar-conteiner'>Manage Rooms</p>
+                </a>
+            </li>
+        </ul>
+  
+{% endblock %}
+
+{% block body %}  
+  <h1>Admin Menu - Wellcome {{user.name}}</h1>
+  <h2>This is the Admin Menu</h2> 
 {% endblock %}

@@ -3,15 +3,9 @@ from ActionProcessor.ActionProcessor import ActionProcessor
 from User.User import User
 
 actionProcessor = ActionProcessor()
-addflag = actionProcessor.addUser({
-    "conectuserid": "rasadmin",
-    "conectusername": "admin",
-    "email": "",
-    "role": "admin",
-    "conectuserpassword": "admin"
-})
+roomList = actionProcessor.getRooms()
+print(roomList)
 
-if addflag:
-    print("User added successfully")
-else:
-    print("User not added")
+actionProcessor.deleteRoom('45')
+
+actionProcessor.addRoom({'roomid': '45', 'roomdesc': 'Room 45'})

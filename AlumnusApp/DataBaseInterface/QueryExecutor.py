@@ -35,7 +35,7 @@ class QueryExecutor:
     # Method to execute a query
     # This method should receive the query and the parameters
     # The method should return the result of the query
-    def execute_query(self, query, parameters):
+    def execute_query(self, query, parameters=None):
         self.cursor.execute(query, parameters)
         if "SELECT" in query:
             return self.cursor.fetchall()

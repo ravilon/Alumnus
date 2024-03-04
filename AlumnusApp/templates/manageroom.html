@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Admin Menu</title>
+{% endblock %}
+
+{% block navbar%}
+    
+{% endblock %}
+
+{% block body %}
+  <div class='container'><h1>Room Manage</h1></div>
+  <div class='container'>
+    <table class="table">
+        <thead><tr>
+            <h2>Room Manage</h2>
+        </tr></thead>
+        <form method="post">
+          <div class="form-group">
+            <label for="roomid">Room ID</label>
+            <input type="number" class="form-control" id="roomid" name="roomid" placeholder="Enter Room ID">
+            <p></p>
+            <label for="roomdesc">Room Description</label>
+            <input type="text" class="form-control" id="roomdesc" name="roomdesc" placeholder="Enter Room Description">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p></p>
+        <h2>{{message}}</h2>
+        <tbody>
+          {% for room in roomList %}
+            <tr>
+              <td class = "container">{{ room[0] }}</td>
+              <td class = "container">{{ room[1] }}</td>
+              <td class = "container">
+                <form method="post" action="/deleteroom">
+                  <input type="hidden" name="roomid" value="{{ room[0] }}">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </td>  
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+{% endblock %}

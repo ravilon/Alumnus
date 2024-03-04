@@ -56,8 +56,6 @@ class ActionProcessor:
     
     def addUser(self, newUserProperties):
         try:
-            # Handle the exception
-            pass
             queryExecutor = QueryExecutor()
             query = """
             INSERT INTO ConectUser (conectuserid, conectusername, email, conectuserpassword, role)
@@ -70,21 +68,65 @@ class ActionProcessor:
                         newUserProperties['role'])
             queryExecutor.execute_query(query, parameters)
             if queryExecutor.cursor.rowcount == 1:
+                queryExecutor.close()
                 return True
         except Exception as e:
+            queryExecutor.close()
             return False
+    
+    def getUsers(self):
+        queryExecutor = QueryExecutor()
+        query = "SELECT * FROM conectuser"
+        results = queryExecutor.execute_query(query)
+        userList = []
+        for result in results:
+            userProperties = {
+                "conectuserid": result[0],
+                "conectusername": result[1],
+                "conectuserpassword": result[2],
+                "role": result[3],
+                "email": result[4]
+            }
+            userList.append(User(userProperties))
+        queryExecutor.close()
+        return userList
     
     def removeUser(self, student_id):
         # TODO: Implement removeStudent logic
         pass
     
-    def addRoom(self, room_id, room_name):
-        # TODO: Implement addRoom logic
-        pass
+    def addRoom(self, roomProperties):
+        try: 
+            queryExecutor = QueryExecutor()
+            query = "INSERT INTO room (roomid, roomdesc) VALUES (%s, %s)"
+            parameters = (roomProperties['roomid'], roomProperties['roomdesc'])
+            queryExecutor.execute_query(query, parameters)
+            if queryExecutor.cursor.rowcount == 1:
+                queryExecutor.close()
+                return True
+        except Exception as e:
+            queryExecutor.close()
+            return False
     
-    def removeRoom(self, room_id):
-        # TODO: Implement removeRoom logic
-        pass
+    def getRooms(self):
+        queryExecutor = QueryExecutor()
+        query = "SELECT * FROM room"
+        results = queryExecutor.execute_query(query)
+        queryExecutor.close()
+        return results
+    
+    def deleteRoom(self, room_id):
+        queryExecutor = QueryExecutor()
+        query = "DELETE FROM room WHERE roomid = %s"
+        parameters = (room_id,)
+        queryExecutor.execute_query(query, parameters)
+        if queryExecutor.cursor.rowcount == 1:
+            queryExecutor.close()
+            return True
+        else:
+            queryExecutor.close()
+            return False
+        
     
     def addClass(self, class_id, class_name, start_date, end_date):
         # TODO: Implement addClass logic
