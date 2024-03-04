@@ -78,22 +78,20 @@ class ActionProcessor:
         queryExecutor = QueryExecutor()
         query = "SELECT * FROM conectuser"
         results = queryExecutor.execute_query(query)
-        userList = []
-        for result in results:
-            userProperties = {
-                "conectuserid": result[0],
-                "conectusername": result[1],
-                "conectuserpassword": result[2],
-                "role": result[3],
-                "email": result[4]
-            }
-            userList.append(User(userProperties))
         queryExecutor.close()
-        return userList
+        return results
     
-    def removeUser(self, student_id):
-        # TODO: Implement removeStudent logic
-        pass
+    def deleteUser(self, student_id):
+        queryExecutor = QueryExecutor()
+        query = "DELETE FROM conectuser WHERE conectuserid = %s"
+        parameters = (student_id,)
+        queryExecutor.execute_query(query, parameters)
+        if queryExecutor.cursor.rowcount == 1:
+            queryExecutor.close()
+            return True
+        else:
+            queryExecutor.close()
+            return False
     
     def addRoom(self, roomProperties):
         try: 

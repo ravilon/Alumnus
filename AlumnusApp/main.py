@@ -26,7 +26,7 @@ def home():
             return render_template('home.html', message="Login failed")
     return render_template('home.html')
 
-@app.route("/adduser", methods=['GET', 'POST'])
+@app.route("/manageuser", methods=['GET', 'POST'])
 def addUser():
     if request.method == 'POST':
         userProperties = {
@@ -38,8 +38,16 @@ def addUser():
         }
         userFlag = actionProcessor.addUser(userProperties)
         if userFlag:
-            return render_template('adduser.html', message="User added successfully")
-    return render_template('adduser.html', message="User not added")
+            return render_template('manageuser.html', message="User added successfully", userList=actionProcessor.getUsers())
+    return render_template('manageuser.html', message="User not added", userList=actionProcessor.getUsers())
+
+@app.route("/deleteuser", methods=['POST'])
+def deleteUser():
+    userid = request.form['userid']
+    if actionProcessor.deleteUser(userid):
+        return render_template('manageuser.html', message="User deleted successfully: " + userid, userList=actionProcessor.getUsers())
+    return render_template('manageuser.html', message="User not deleted", userList=actionProcessor.getUsers())
+
 
 @app.route("/manageroom", methods=['GET', 'POST'])
 def addRoom():
@@ -56,7 +64,6 @@ def addRoom():
 @app.route("/deleteroom", methods=['POST'])
 def deleteRoom():
     roomid = request.form['roomid']
-    print(roomid)
     actionProcessor.deleteRoom(roomid)
     return render_template('manageroom.html', message="Room deleted successfully: " + roomid, roomList=actionProcessor.getRooms())
 
