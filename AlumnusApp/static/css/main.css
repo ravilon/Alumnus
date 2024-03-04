@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #50b8e7; /* Adjust the alpha value (0.5 for 50% opacity) */
+    background-blend-mode: overlay;
+    overflow:auto;
+}
+
+.logo {
+    width: 60px; /* Adjust the width as needed */
+    height: auto; /* Maintain the aspect ratio */
+    margin: 50 auto; /* Add margin to create space around the logo */
+}
+
+
+/* Style the container */
+.container {
+    color:#fff;
+    word-wrap: break-word;    
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 200px;
+    padding: 20px;
+    border: 1px solid #84cdee;
+    border-radius: 10px;
+    background-color: #84cdee;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style the form */
+form {
+    text-align: center;
+}
+
+/* Style the form elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 79%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 75%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #011823;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+    background-color: #011823;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+/* Style the navbar */
+.navbar {
+    background-color: #014d6f; /* Lemon Yellow */
+    color: #dcf0fa; /* Lemon Green */
+    padding: 10px 0;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; 
+    padding-bottom: 10px;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #011823; 
+    width: 60px; /* Adjust the width as needed */
+    height: auto;
+    padding-left: 10px;
+    padding-left: 10px; /* Maintain the aspect ratio */
+}
+
+.navbar-logo-wallet {
+    font-size: 24px;
+    font-weight: bold;
+    color: #011823; 
+    width: 60px; /* Adjust the width as needed */
+    height: auto;
+}
+
+
+.navbar-links {
+    list-style: none;
+    padding-left: 2px;
+    display: flex;
+    justify-content: start;
+}
+
+.navbar-links li {
+    margin-right: 20px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #011823; /* Lemon Green */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar-conteiner {
+    color:#fff;
+    word-wrap: break-word;    
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #011823;
+    border-radius: 80px;
+    background-color: #011823;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-links a:hover {
+    color: #010804; /* Lemon Yellow */
+}
+
+

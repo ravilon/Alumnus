@@ -1,26 +1,45 @@
 # Class main
-from flask import Flask
+from flask import Flask, render_template, request
 from ActionProcessor.ActionProcessor import ActionProcessor
 from User.User import User
 
-import os
-
-print("Current working directory:", os.getcwd())
-
-
 app = Flask(__name__)
-@app.route("/")
-def hello_world():
-    actionProcessor = ActionProcessor()
-    # Create a query to get all the Users
-    user = actionProcessor.login("admin", "Inter@1234")
-    if (user != None):
-        print("Login:" , user.name, user.email, user.role)
-    else:
-        print("Login failed")
-    return "<p>Hello, World!</p>"
-# Create a instance of the class ActionProcessor
+actionProcessor = ActionProcessor()
 
+@app.route("/", methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        print(request.form['userid'])
+        print(request.form['password'])
+        user = actionProcessor.login(request.form['userid'], request.form['password'])
+        if (user != None):
+            print("Login:" , user.name, user.email, user.role)
+            if user.role == "admin":
+                return render_template('admin.html', user=user)
+            elif user.role == "student":
+                return render_template('student.html', user=user)
+            elif user.role == "teacher":
+                return render_template('teacher.html', user=user)
+            return render_template('home.html')
+        else:
+            print("Login failed")
+            return render_template('home.html', message="Login failed")
+    return render_template('home.html')
+
+@app.route("/adduser", methods=['GET', 'POST'])
+def addUser():
+    if request.method == 'POST':
+        userProperties = {
+            "conectuserid": request.form['userid'],
+            "conectusername": request.form['username'],
+            "email": request.form['email'],
+            "role": request.form['role'].lower(),
+            "conectuserpassword": request.form['password']
+        }
+        userFlag = actionProcessor.addUser(userProperties)
+        if userFlag:
+            return render_template('adduser.html', message="User added successfully")
+    return render_template('adduser.html', message="User not added")
 
 
 

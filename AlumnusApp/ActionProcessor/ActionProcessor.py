@@ -27,27 +27,13 @@ from User.User import User
 
 class ActionProcessor:
     def __init__(self):
-        self.queryExecutor = QueryExecutor()
+        __ActionProcessor__ = "ActionProcessor"
         
     def login(self, conectUserId, password):
-        """ if len(results) == 1:
-            # Print out the column names returned by the query
-            print("Column names:", [desc[0] for desc in self.queryExecutor.cursor.description])
-            # Find the index of the column name "conectuserid" dynamically
-            column_names = [desc[0] for desc in self.queryExecutor.cursor.description]
-            column_index = None
-            for index, name in enumerate(column_names):
-                if name.lower() == 'conectuserid':
-                    column_index = index
-                    break
-            if column_index is not None:
-                print("Index of the column name 'conectuserid':", column_index)
-                print("Value of the column name 'conectuserid':", results[0][column_index])
-                return results[0] """
-                
+        queryExecutor = QueryExecutor()       
         query = "SELECT * FROM ConectUser WHERE conectuserid = %s AND conectuserpassword = %s"
         parameters = (conectUserId, password)
-        results = self.queryExecutor.execute_query(query, parameters)
+        results = queryExecutor.execute_query(query, parameters)
         if len(results) == 1:
             # Create a map for each index to column value
             print(results[0])
@@ -59,31 +45,37 @@ class ActionProcessor:
                 "email": results[0][4],
             }
             user = User(userProperties)
+            queryExecutor.close()
             return user
+        queryExecutor.close()
         return None        
-            
-        return None
-
            
-    
     def logout(self, user):
         # TODO: Implement logout logic
         pass
     
-    def addStudent(self, student_id, student_name):
-        # TODO: Implement addStudent logic
-        pass
+    def addUser(self, newUserProperties):
+        try:
+            # Handle the exception
+            pass
+            queryExecutor = QueryExecutor()
+            query = """
+            INSERT INTO ConectUser (conectuserid, conectusername, email, conectuserpassword, role)
+            VALUES (%s, %s, %s, %s, %s)
+            """
+            parameters = (newUserProperties['conectuserid'], 
+                        newUserProperties['conectusername'], 
+                        newUserProperties['email'], 
+                        newUserProperties['conectuserpassword'], 
+                        newUserProperties['role'])
+            queryExecutor.execute_query(query, parameters)
+            if queryExecutor.cursor.rowcount == 1:
+                return True
+        except Exception as e:
+            return False
     
-    def removeStudent(self, student_id):
+    def removeUser(self, student_id):
         # TODO: Implement removeStudent logic
-        pass
-    
-    def addTeacher(self, teacher_id, teacher_name):
-        # TODO: Implement addTeacher logic
-        pass
-    
-    def removeTeacher(self, teacher_id):
-        # TODO: Implement removeTeacher logic
         pass
     
     def addRoom(self, room_id, room_name):

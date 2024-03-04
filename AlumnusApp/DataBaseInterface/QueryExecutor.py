@@ -37,7 +37,11 @@ class QueryExecutor:
     # The method should return the result of the query
     def execute_query(self, query, parameters):
         self.cursor.execute(query, parameters)
-        return self.cursor.fetchall()
+        if "SELECT" in query:
+            return self.cursor.fetchall()
+        else:
+            self.connection.commit()
+            return None
 
     # Method to close the connection to the database
     def close(self):
