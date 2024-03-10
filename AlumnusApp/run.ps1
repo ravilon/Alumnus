@@ -1,5 +1,5 @@
 # Define the host variable
-$hostAddress = '192.168.8.82'  # Change this to your desired default host address
+$hostAddress = ''  # Change this to your desired default host address
 
 # Check if the host variable is empty, and if so, set it to 0.0.0.0
 if ([string]::IsNullOrEmpty($hostAddress)) {
